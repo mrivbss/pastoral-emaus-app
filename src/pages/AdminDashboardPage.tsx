@@ -74,7 +74,7 @@ export function AdminDashboardPage() {
   const saveMember = async (input: IntegranteInput) => {
     if (editingMember) await updateIntegrante(editingMember.id, input)
     else await createIntegrante(input)
-    showToast(editingMember ? 'Integrante actualizado.' : 'Integrante creado.', 'success')
+    showToast(editingMember ? 'Servidor actualizado.' : 'Servidor creado.', 'success')
     await refresh()
   }
 
@@ -94,7 +94,7 @@ export function AdminDashboardPage() {
   }
 
   const confirmCopy = confirmTarget?.kind === 'member'
-    ? { title: 'Eliminar integrante', message: `Se eliminará a ${confirmTarget.item.nombre} y todo su historial de pagos. Esta acción no se puede deshacer.`, label: 'Eliminar integrante' }
+    ? { title: 'Eliminar servidor', message: `Se eliminará a ${confirmTarget.item.nombre} y todo su historial de pagos. Esta acción no se puede deshacer.`, label: 'Eliminar servidor' }
     : confirmTarget?.kind === 'payment'
       ? { title: 'Anular pago', message: `Se eliminará el pago registrado de ${confirmTarget.memberName}. Esta acción no se puede deshacer.`, label: 'Anular pago' }
       : confirmTarget?.kind === 'donation'
@@ -157,7 +157,7 @@ export function AdminDashboardPage() {
         />
 
         <nav className="admin-tabs" aria-label="Secciones administrativas">
-          <button className={tab === 'integrantes' ? 'is-active' : ''} onClick={() => setTab('integrantes')}><UsersRound size={19} /> Integrantes</button>
+          <button className={tab === 'integrantes' ? 'is-active' : ''} onClick={() => setTab('integrantes')}><UsersRound size={19} /> Servidores</button>
           <button className={tab === 'donaciones' ? 'is-active' : ''} onClick={() => setTab('donaciones')}><HandHeart size={19} /> Donaciones</button>
           <button className={tab === 'transferencia' ? 'is-active' : ''} onClick={() => setTab('transferencia')}>Datos bancarios</button>
         </nav>
@@ -168,11 +168,11 @@ export function AdminDashboardPage() {
             {tab === 'integrantes' && (
               <section className="admin-section">
                 <div className="section-toolbar">
-                  <div><h2>Integrantes</h2><p>{filteredMembers.length} de {members.length} registros</p></div>
+                  <div><h2>Servidores</h2><p>{filteredMembers.length} de {members.length} registros</p></div>
                   <div className="toolbar-actions">
                     <button className="button button--ghost" onClick={() => exportPaymentsCsv(members, payments, period.year)}><Download size={18} /> CSV {period.year}</button>
                     <button className="button button--ghost" disabled={backingUp} onClick={() => void downloadFullBackup()}><Download size={18} /> {backingUp ? 'Generando…' : 'Respaldo JSON'}</button>
-                    <button className="button button--primary" onClick={() => { setEditingMember(null); setMemberModal(true) }}><Plus size={19} /> Nuevo integrante</button>
+                    <button className="button button--primary" onClick={() => { setEditingMember(null); setMemberModal(true) }}><Plus size={19} /> Nuevo servidor</button>
                   </div>
                 </div>
                 <MemberFilters search={search} status={statusFilter} payment={paymentFilter} onSearch={setSearch} onStatus={setStatusFilter} onPayment={setPaymentFilter} />
@@ -192,7 +192,7 @@ export function AdminDashboardPage() {
                       />
                     ))}
                   </div>
-                ) : <div className="empty-state"><UsersRound size={38} /><h3>No encontramos integrantes</h3><p>Ajusta los filtros o agrega un nuevo integrante.</p></div>}
+                ) : <div className="empty-state"><UsersRound size={38} /><h3>No encontramos servidores</h3><p>Ajusta los filtros o agrega un nuevo servidor.</p></div>}
               </section>
             )}
             {tab === 'donaciones' && (

@@ -10,7 +10,7 @@ interface StatsGridProps {
 }
 
 const stats = [
-  { key: 'activeMembers', label: 'Integrantes activos', icon: UsersRound, tone: 'petrol', money: false },
+  { key: 'activeMembers', label: 'Servidores activos', icon: UsersRound, tone: 'petrol', money: false },
   { key: 'paid', label: 'Pagados este mes', icon: CircleCheckBig, tone: 'green', money: false },
   { key: 'pending', label: 'Pendientes este mes', icon: Clock3, tone: 'red', money: false },
   { key: 'collected', label: 'Cuotas del mes', icon: CircleDollarSign, tone: 'gold', money: true },

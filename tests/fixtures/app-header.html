@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <title>App header layout fixture</title>
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="app-header__inner">
+        <a class="brand" href="#">
+          <img src="/src/assets/logo.png" alt="Logo Emaús Varones P.S.A.H. Talca" />
+          <div>
+            <span class="brand__eyebrow">Pastoral</span>
+            <strong>Emaús Varones PSAH</strong>
+            <small>Cuota mensual $3.000</small>
+          </div>
+        </a>
+        <nav class="public-nav" aria-label="Navegación principal">
+          <a href="#"><span>Administración</span></a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="hero__content">
+        <h1>Pastoral Emaús Varones PSAH</h1>
+      </section>
+    </main>
+    <output id="layout-result"></output>
+    <script>
+      const headerInner = document.querySelector('.app-header__inner')
+      const logo = document.querySelector('.brand img')
+      const heroTitle = document.querySelector('.hero__content h1')
+      const logoStyle = getComputedStyle(logo)
+      document.querySelector('#layout-result').textContent = JSON.stringify({
+        headerHeight: headerInner.getBoundingClientRect().height,
+        logoWidth: logo.getBoundingClientRect().width,
+        logoHeight: logo.getBoundingClientRect().height,
+        logoObjectFit: logoStyle.objectFit,
+        logoBackground: logoStyle.backgroundColor,
+        logoBorderWidth: logoStyle.borderWidth,
+        logoShadow: logoStyle.boxShadow,
+        heroTitleAlign: getComputedStyle(heroTitle).textAlign,
+      })
+    </script>
+  </body>
+</html>

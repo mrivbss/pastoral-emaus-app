@@ -26,7 +26,7 @@ export function MemberFilters({ search, status, payment, onSearch, onStatus, onP
     <div className="filters">
       <label className="search-field">
         <Search size={19} />
-        <input value={search} onChange={(event) => onSearch(event.target.value)} placeholder="Buscar por nombre o RUT" aria-label="Buscar integrante" />
+        <input value={search} onChange={(event) => onSearch(event.target.value)} placeholder="Buscar por nombre o RUT" aria-label="Buscar servidor" />
       </label>
       <div className="filter-selects">
         <SlidersHorizontal size={18} aria-hidden="true" />

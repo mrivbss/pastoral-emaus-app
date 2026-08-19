@@ -60,7 +60,7 @@ export function MemberProfilePage() {
   const saveMember = async (input: IntegranteInput) => {
     if (!member) return
     await updateIntegrante(member.id, input)
-    showToast('Integrante actualizado.', 'success')
+    showToast('Servidor actualizado.', 'success')
     await load()
   }
 
@@ -100,12 +100,12 @@ export function MemberProfilePage() {
       <main className="container profile-page">
         <Link className="back-link" to={`/admin`}><ArrowLeft size={18} /> Volver al dashboard</Link>
         {loading ? <LoadingScreen /> : error || !member ? (
-          <div className="error-panel"><p>{error || 'No se encontró el integrante.'}</p><button className="button button--ghost" onClick={() => void load()}>Reintentar</button></div>
+          <div className="error-panel"><p>{error || 'No se encontró el servidor.'}</p><button className="button button--ghost" onClick={() => void load()}>Reintentar</button></div>
         ) : (
           <>
             <section className="profile-header-card">
               <span className="profile-avatar"><UserRound size={34} /></span>
-              <div className="profile-title"><p>Perfil del integrante</p><h1>{member.nombre}</h1><span className={`member-status member-status--${member.estado.toLowerCase()}`}>{member.estado}</span></div>
+              <div className="profile-title"><p>Perfil del servidor</p><h1>{member.nombre}</h1><span className={`member-status member-status--${member.estado.toLowerCase()}`}>{member.estado}</span></div>
               <button className="button button--ghost" onClick={() => setEditingMember(true)}><Edit3 size={17} /> Editar datos</button>
             </section>
 

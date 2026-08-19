@@ -34,7 +34,7 @@ export function WhatsAppModal({ open, member, month, year, paid, onClose }: What
   return (
     <Modal open={open} title="Recordatorio por WhatsApp" onClose={onClose}>
       <div className="stack-form">
-        {!member?.telefono && <p className="notice">Este integrante no tiene teléfono registrado. WhatsApp te permitirá elegir la conversación.</p>}
+        {!member?.telefono && <p className="notice">Este servidor no tiene teléfono registrado. WhatsApp te permitirá elegir la conversación.</p>}
         <label className="field">
           <span>Mensaje (puedes editarlo antes de abrir WhatsApp)</span>
           <textarea rows={12} value={message} onChange={(event) => setMessage(event.target.value)} />

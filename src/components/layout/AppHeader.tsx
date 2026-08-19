@@ -33,7 +33,6 @@ export function AppHeader({ admin = false, userEmail, onSignOut }: AppHeaderProp
           </div>
         ) : (
           <nav className="public-nav" aria-label="Navegación principal">
-            <NavLink to="/registro">Inscribirme</NavLink>
             <NavLink to="/admin/login" aria-label="Acceso administrativo">
               <LogIn size={17} /> <span>Administración</span>
             </NavLink>

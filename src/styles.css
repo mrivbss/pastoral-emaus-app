@@ -45,7 +45,7 @@ h1, h2, h3, p { margin-top: 0; }
 }
 .app-header__inner {
   width: min(1160px, calc(100% - 24px));
-  min-height: 82px;
+  min-height: 96px;
   margin-inline: auto;
   display: flex;
   align-items: center;
@@ -54,13 +54,10 @@ h1, h2, h3, p { margin-top: 0; }
 }
 .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; min-width: 0; }
 .brand img {
-  width: 62px;
-  height: 62px;
-  object-fit: contain;
+  width: 74px;
+  height: 74px;
+  object-fit: cover;
   border-radius: 50%;
-  background: white;
-  border: 2px solid rgba(255,255,255,.76);
-  box-shadow: 0 4px 16px rgba(0,0,0,.2);
 }
 .brand div { display: flex; flex-direction: column; min-width: 0; }
 .brand strong { font-size: clamp(.87rem, 2.8vw, 1.08rem); line-height: 1.2; }
@@ -68,10 +65,8 @@ h1, h2, h3, p { margin-top: 0; }
 .brand__eyebrow { color: #efd88f; text-transform: uppercase; letter-spacing: .14em; font-size: .6rem; font-weight: 700; }
 .public-nav { display: flex; align-items: center; gap: 4px; }
 .public-nav a { padding: 10px 11px; display: flex; align-items: center; gap: 6px; text-decoration: none; font-size: .84rem; font-weight: 700; border-radius: 10px; }
-.public-nav a:first-child { background: var(--gold-500); color: #1e2927; }
 .public-nav a:last-child { color: rgba(255,255,255,.84); }
 .public-nav a:hover { background-color: rgba(255,255,255,.12); }
-.public-nav a:first-child:hover { background-color: #e5b431; }
 .admin-session { display: flex; align-items: center; gap: 12px; }
 .admin-session > span { display: flex; align-items: center; gap: 7px; font-size: .82rem; opacity: .86; }
 
@@ -367,14 +362,14 @@ h1, h2, h3, p { margin-top: 0; }
 }
 
 @media (max-width: 720px) {
-  .app-header__inner { min-height: 72px; }
-  .brand img { width: 52px; height: 52px; }
+  .app-header__inner { min-height: 82px; }
+  .brand img { width: 60px; height: 60px; }
   .brand small, .brand__eyebrow { display: none; }
   .public-nav a { min-height: 42px; padding: 8px 9px; }
   .public-nav a:last-child span, .admin-session > span { display: none; }
   .hero { padding-block: 36px 38px; grid-template-columns: 1fr; gap: 32px; }
   .hero-fee { min-height: 210px; width: min(310px, 90%); margin-inline: auto; }
-  .hero__content h1 { font-size: clamp(2rem, 10vw, 3rem); }
+  .hero__content h1 { font-size: clamp(2rem, 10vw, 3rem); text-align: center; }
   .bank-details { grid-template-columns: 1fr; gap: 13px; }
   .section-heading { flex-wrap: wrap; }
   .fee-pill { margin-left: 57px; }
@@ -401,7 +396,6 @@ h1, h2, h3, p { margin-top: 0; }
 @media (max-width: 520px) {
   .container { width: calc(100% - 20px); }
   .narrow-page { padding-top: 18px; }
-  .public-nav a:first-child { font-size: .75rem; }
   .hero { padding-top: 28px; }
   .hero__actions { flex-direction: column; }
   .hero__actions .button { width: 100%; max-width: 100%; white-space: normal; text-align: center; }

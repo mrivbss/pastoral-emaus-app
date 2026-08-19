@@ -62,7 +62,7 @@ export function RegistrationPage() {
           <section className="form-card">
             <div className="form-card__heading">
               <span><UserPlus size={24} /></span>
-              <div><p>Registro público</p><h1>Inscripción de integrante</h1></div>
+              <div><p>Registro público</p><h1>Inscripción de servidor</h1></div>
             </div>
             <p className="form-intro">Completa tus datos para incorporarte al registro de la Pastoral Emaús Varones PSAH. Los campos con * son obligatorios.</p>
             <form className="form-grid" onSubmit={submit}>

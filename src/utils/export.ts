@@ -18,7 +18,7 @@ export const exportPaymentsCsv = (
   year: number,
 ) => {
   const header = [
-    'Integrante',
+    'Servidor',
     'RUT',
     'Teléfono',
     'Email',

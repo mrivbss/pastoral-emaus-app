@@ -90,7 +90,7 @@ export function MemberFormModal({ open, member, onClose, onSave }: MemberFormMod
   }
 
   return (
-    <Modal open={open} title={member ? 'Editar integrante' : 'Nuevo integrante'} onClose={onClose} size="large">
+    <Modal open={open} title={member ? 'Editar servidor' : 'Nuevo servidor'} onClose={onClose} size="large">
       <form id="member-form" className="form-grid" onSubmit={submit}>
         <label className="field field--wide">
           <span>Nombre completo *</span>
@@ -129,7 +129,7 @@ export function MemberFormModal({ open, member, onClose, onSave }: MemberFormMod
         {error && <p className="form-error field--wide" role="alert">{error}</p>}
         <div className="form-actions field--wide">
           <button type="button" className="button button--ghost" onClick={onClose} disabled={saving}>Cancelar</button>
-          <button type="submit" className="button button--primary" disabled={saving}>{saving ? 'Guardando…' : 'Guardar integrante'}</button>
+          <button type="submit" className="button button--primary" disabled={saving}>{saving ? 'Guardando…' : 'Guardar servidor'}</button>
         </div>
       </form>
     </Modal>

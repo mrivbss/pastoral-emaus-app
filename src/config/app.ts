@@ -1,5 +1,6 @@
 export const APP_NAME = 'Pastoral Emaús Varones PSAH'
 export const MONTHLY_FEE = 3_000
+export const PUBLIC_APP_URL = 'https://pastoral-emaus-app.vercel.app/'
 
 export const BANK_DETAILS = {
   nombre: 'Carlos Patricio Burdiles Bravo',
@@ -34,8 +35,4 @@ export const DONATION_METHODS = [
   'Otro',
 ] as const
 
-export const getPublicAppUrl = () => {
-  const configured = import.meta.env.VITE_PUBLIC_APP_URL?.trim()
-  if (configured) return configured.replace(/\/$/, '')
-  return typeof window === 'undefined' ? '' : window.location.origin
-}
+export const getPublicAppUrl = () => PUBLIC_APP_URL

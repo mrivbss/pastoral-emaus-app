@@ -58,7 +58,7 @@ export function TransferCard({ compact = false }: { compact?: boolean }) {
         </button>
         {!compact && (
           <button className="button button--secondary" onClick={share}>
-            <Share2 size={19} /> Compartir aplicación
+            <Share2 size={19} /> Compartir datos
           </button>
         )}
       </div>
