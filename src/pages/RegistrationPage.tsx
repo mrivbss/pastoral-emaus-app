@@ -70,7 +70,7 @@ export function RegistrationPage() {
               <label className="field"><span>RUT *</span><input required value={form.rut} onChange={(e) => update('rut', e.target.value)} onBlur={() => form.rut && update('rut', formatRut(form.rut))} placeholder="12.345.678-9" /></label>
               <label className="field"><span>Teléfono / WhatsApp *</span><input required type="tel" autoComplete="tel" value={form.telefono} onChange={(e) => update('telefono', e.target.value)} placeholder="+56 9 1234 5678" /></label>
               <label className="field"><span>Correo electrónico *</span><input required type="email" autoComplete="email" value={form.email} onChange={(e) => update('email', e.target.value)} /></label>
-              <label className="field"><span>Fecha de ingreso</span><input type="date" value={form.fechaIngreso} onChange={(e) => update('fechaIngreso', e.target.value)} /></label>
+              <label className="field"><span>Fecha de cumpleaños</span><input type="date" value={form.fechaIngreso} onChange={(e) => update('fechaIngreso', e.target.value)} /></label>
               <label className="field field--wide"><span>Dirección / comuna *</span><input required autoComplete="street-address" value={form.direccion} onChange={(e) => update('direccion', e.target.value)} /></label>
               <label className="field field--wide"><span>Observaciones</span><textarea rows={4} value={form.observaciones} onChange={(e) => update('observaciones', e.target.value)} placeholder="Información opcional que debamos conocer" /></label>
               {error && <p className="form-error field--wide" role="alert">{error}</p>}
