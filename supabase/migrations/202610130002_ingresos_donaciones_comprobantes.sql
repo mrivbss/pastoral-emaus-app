@@ -34,7 +34,7 @@ create table public.ingresos (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   constraint ingresos_codigo_tipo_check check (
-    (tipo = 'Ingreso' and codigo_concepto between 1 and 9)
+    (tipo = 'Ingreso' and codigo_concepto between 1 and 8)
     or (tipo = 'Egreso' and codigo_concepto between 10 and 24)
   ),
   constraint ingresos_concepto_length check (char_length(trim(concepto)) between 2 and 160),
@@ -66,4 +66,4 @@ grant select, insert, update, delete on table public.ingresos to authenticated;
 grant usage, select on sequence public.ingresos_folio_seq to authenticated;
 
 comment on table public.ingresos
-is 'Movimientos financieros de Emaús, basados en el catálogo oficial de conceptos 1 al 24.';
+is 'Movimientos financieros de Emaús, basados en el catálogo oficial de ingresos 1 al 8 y egresos 10 al 24.';

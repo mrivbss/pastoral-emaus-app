@@ -44,7 +44,6 @@ export const FINANCIAL_CONCEPTS = [
   { codigo: 6, nombre: 'Venta de Polerones', precioUnitarioSugerido: 0, tipo: 'Ingreso' },
   { codigo: 7, nombre: 'Venta de Calendarios 2027', precioUnitarioSugerido: 0, tipo: 'Ingreso' },
   { codigo: 8, nombre: 'Otros Ingresos', precioUnitarioSugerido: 0, tipo: 'Ingreso' },
-  { codigo: 9, nombre: 'Venta de Fierritos Emaús', precioUnitarioSugerido: 2_500, tipo: 'Ingreso' },
   { codigo: 10, nombre: 'Compras de Insumos', precioUnitarioSugerido: 0, tipo: 'Egreso' },
   { codigo: 11, nombre: 'Compra Once Reunión Mensual', precioUnitarioSugerido: 0, tipo: 'Egreso' },
   { codigo: 12, nombre: 'Compra Alimento Retiro', precioUnitarioSugerido: 0, tipo: 'Egreso' },
