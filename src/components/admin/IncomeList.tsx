@@ -20,7 +20,7 @@ export function IncomeList({ incomes, onReceipt, onEdit, onDelete }: IncomeListP
       .reduce((sum, income) => sum + income.monto_total, 0)
     const totals = new Map<string, { code: number; concept: string; type: Ingreso['tipo']; total: number }>()
     incomes.forEach((income) => {
-      const key = `${income.tipo}-${income.codigo_concepto}`
+      const key = `${income.tipo}-${income.codigo_concepto}-${income.concepto}`
       const current = totals.get(key)
       totals.set(key, {
         code: income.codigo_concepto,
@@ -77,7 +77,7 @@ export function IncomeList({ incomes, onReceipt, onEdit, onDelete }: IncomeListP
           </div>
           <div className="concept-totals__grid">
             {summary.byConcept.map((item) => (
-              <article key={`${item.type}-${item.code}`}>
+              <article key={`${item.type}-${item.code}-${item.concept}`}>
                 <span className={`movement-badge movement-badge--${item.type.toLowerCase()}`}>{item.type}</span>
                 <div>
                   <small>#{String(item.code).padStart(2, '0')}</small>

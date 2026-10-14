@@ -16,7 +16,13 @@ interface IncomeFormModalProps {
 interface ConceptLine {
   precioUnitario: string
   cantidad: string
+  conceptoPersonalizado: string
 }
+
+const CUSTOM_CONCEPT_CODES = [8, 24] as const
+
+const requiresCustomConcept = (code: number) =>
+  CUSTOM_CONCEPT_CODES.some((customCode) => customCode === code)
 
 const lineSubtotal = (line: ConceptLine) => {
   const price = Number(line.precioUnitario)
@@ -47,6 +53,10 @@ export function IncomeFormModal({ open, income, onClose, onSave }: IncomeFormMod
             [income.codigo_concepto]: {
               precioUnitario: String(income.precio_unitario),
               cantidad: String(income.cantidad),
+              conceptoPersonalizado: requiresCustomConcept(income.codigo_concepto)
+                && income.concepto !== (income.codigo_concepto === 8 ? 'Otros Ingresos' : 'Otras compras y pagos')
+                ? income.concepto
+                : '',
             },
           }
         : {},
@@ -79,6 +89,7 @@ export function IncomeFormModal({ open, income, onClose, onSave }: IncomeFormMod
       next[code] = {
         precioUnitario: String(suggestedPrice),
         cantidad: '1',
+        conceptoPersonalizado: '',
       }
       return next
     })
@@ -114,13 +125,24 @@ export function IncomeFormModal({ open, income, onClose, onSave }: IncomeFormMod
       return
     }
 
+    const missingCustomConcept = selectedConcepts.some((concept) =>
+      requiresCustomConcept(concept.codigo)
+      && lines[concept.codigo].conceptoPersonalizado.trim().length < 2,
+    )
+    if (missingCustomConcept) {
+      setError(`Especifica el concepto de ${type.toLocaleLowerCase('es')} seleccionado.`)
+      return
+    }
+
     const inputs: IngresoInput[] = selectedConcepts.map((concept) => {
       const line = lines[concept.codigo]
       return {
         fecha: date,
         tipo: concept.tipo,
         codigo_concepto: concept.codigo,
-        concepto: concept.nombre,
+        concepto: requiresCustomConcept(concept.codigo)
+          ? line.conceptoPersonalizado.trim()
+          : concept.nombre,
         detalle_responsable: detail.trim(),
         comprobante: reference.trim() || null,
         observacion: observation.trim() || null,
@@ -241,6 +263,20 @@ export function IncomeFormModal({ open, income, onClose, onSave }: IncomeFormMod
                     <span>Subtotal</span>
                     <strong>{formatCurrency(lineSubtotal(line))}</strong>
                   </div>
+                  {requiresCustomConcept(concept.codigo) && (
+                    <label className="field income-line__custom-concept">
+                      <span>Especificar concepto de {concept.tipo.toLocaleLowerCase('es')} *</span>
+                      <input
+                        type="text"
+                        required
+                        minLength={2}
+                        maxLength={160}
+                        value={line.conceptoPersonalizado}
+                        onChange={(event) => updateLine(concept.codigo, 'conceptoPersonalizado', event.target.value)}
+                        placeholder={concept.codigo === 8 ? 'Ej. Venta de artículos pastorales' : 'Ej. Reparación de equipos'}
+                      />
+                    </label>
+                  )}
                 </div>
               )
             })}
