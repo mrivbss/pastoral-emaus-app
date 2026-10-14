@@ -1,5 +1,5 @@
 import { MONTHS } from '../config/app'
-import type { Donacion, Integrante, Pago } from '../types'
+import type { Donacion, Ingreso, Integrante, Pago } from '../types'
 
 const download = (blob: Blob, filename: string) => {
   const anchor = document.createElement('a')
@@ -54,17 +54,53 @@ export const exportJsonBackup = (
   members: Integrante[],
   payments: Pago[],
   donations: Donacion[],
+  incomes: Ingreso[],
 ) => {
   const payload = {
-    version: 2,
+    version: 3,
     exportedAt: new Date().toISOString(),
     integrantes: members,
     pagos: payments,
     donaciones: donations,
+    ingresos: incomes,
     legacyImportReady: true,
   }
   download(
     new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }),
     `respaldo_emaus_${new Date().toISOString().slice(0, 10)}.json`,
+  )
+}
+
+export const exportIngresosCsv = (incomes: Ingreso[]) => {
+  const header = [
+    'Movimiento N°',
+    'Fecha',
+    'Tipo',
+    'Código',
+    'Concepto',
+    'Detalle / Responsable',
+    'Comprobante',
+    'Observación',
+    'Precio Unitario',
+    'Cantidad',
+    'Monto Total',
+  ]
+  const rows = incomes.map((income) => [
+    income.folio,
+    income.fecha,
+    income.tipo,
+    income.codigo_concepto,
+    income.concepto,
+    income.detalle_responsable,
+    income.comprobante || '',
+    income.observacion || '',
+    income.precio_unitario,
+    income.cantidad,
+    income.monto_total,
+  ])
+  const csv = `\ufeff${[header, ...rows].map((row) => row.map(csvCell).join(';')).join('\n')}`
+  download(
+    new Blob([csv], { type: 'text/csv;charset=utf-8' }),
+    `ingresos_egresos_emaus_${new Date().toISOString().slice(0, 10)}.csv`,
   )
 }

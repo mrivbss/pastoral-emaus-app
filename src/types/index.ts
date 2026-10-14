@@ -1,7 +1,9 @@
-import type { DONATION_METHODS, MEMBER_STATUSES } from '../config/app'
+import type { DONATION_METHODS, FINANCIAL_CONCEPTS, MEMBER_STATUSES } from '../config/app'
 
 export type MemberStatus = (typeof MEMBER_STATUSES)[number]
 export type DonationMethod = (typeof DONATION_METHODS)[number]
+export type IncomeType = (typeof FINANCIAL_CONCEPTS)[number]['tipo']
+export type IncomeConceptCode = (typeof FINANCIAL_CONCEPTS)[number]['codigo']
 
 export interface Integrante {
   id: string
@@ -45,6 +47,8 @@ export interface Donacion {
   telefono: string | null
   email: string | null
   monto: number
+  es_monetaria: boolean
+  detalle_tangible: string | null
   fecha: string
   medio: DonationMethod
   observacion: string | null
@@ -56,6 +60,37 @@ export interface Donacion {
 export type DonacionInput = Omit<
   Donacion,
   'id' | 'registrado_por' | 'created_at' | 'updated_at'
+>
+
+export interface Ingreso {
+  id: string
+  folio: number
+  fecha: string
+  tipo: IncomeType
+  codigo_concepto: IncomeConceptCode
+  concepto: string
+  detalle_responsable: string
+  comprobante: string | null
+  observacion: string | null
+  precio_unitario: number
+  cantidad: number
+  monto_total: number
+  registrado_por: string | null
+  created_at: string
+  updated_at: string
+}
+
+export type IngresoInput = Pick<
+  Ingreso,
+  | 'fecha'
+  | 'tipo'
+  | 'codigo_concepto'
+  | 'concepto'
+  | 'detalle_responsable'
+  | 'comprobante'
+  | 'observacion'
+  | 'precio_unitario'
+  | 'cantidad'
 >
 
 export interface RegistroPublicoInput {

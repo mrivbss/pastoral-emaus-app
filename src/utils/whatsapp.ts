@@ -1,5 +1,6 @@
 import { APP_NAME, BANK_DETAILS, MONTHLY_FEE, MONTHS, getPublicAppUrl } from '../config/app'
-import { formatCurrency } from './format'
+import type { Ingreso } from '../types'
+import { formatCurrency, formatDate } from './format'
 
 export const normalizeChileanPhone = (phone: string | null) => {
   let digits = (phone || '').replace(/\D/g, '')
@@ -33,4 +34,25 @@ export const whatsappUrl = (message: string, phone?: string | null) => {
   const normalized = normalizeChileanPhone(phone || '')
   const base = normalized ? `https://wa.me/${normalized}` : 'https://wa.me/'
   return `${base}?text=${encodeURIComponent(message)}`
+}
+
+export const incomeReceiptMessage = (income: Ingreso) => {
+  const reference = income.comprobante?.trim() || `Movimiento ${income.folio}`
+  const detail = [income.detalle_responsable, income.observacion]
+    .filter(Boolean)
+    .join(' — ')
+  return [
+    'PARROQUIA SAN ALBERTO HURTADO DE TALCA',
+    'PASTORAL EMAÚS VARONES PSAH',
+    '',
+    `COMPROBANTE DE ${income.tipo.toUpperCase()}`,
+    `Movimiento N°: ${income.folio}`,
+    `N° Comprobante / Referencia: ${reference}`,
+    `Fecha: ${formatDate(income.fecha)}`,
+    `Concepto: [#${String(income.codigo_concepto).padStart(2, '0')}] ${income.concepto}`,
+    `Detalle / Responsable: ${detail}`,
+    `Precio Unitario: ${formatCurrency(income.precio_unitario)}`,
+    `Cantidad: ${income.cantidad}`,
+    `MONTO TOTAL: ${formatCurrency(income.monto_total)}`,
+  ].join('\n')
 }

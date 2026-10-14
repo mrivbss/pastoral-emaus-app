@@ -226,6 +226,7 @@ h1, h2, h3, p { margin-top: 0; }
 .modal { width: min(560px, 100%); max-height: calc(100dvh - 28px); display: flex; flex-direction: column; background: var(--surface); border-radius: 18px; box-shadow: 0 24px 70px rgba(0,0,0,.3); animation: modal-in .18s ease-out; }
 .modal--small { width: min(440px, 100%); }
 .modal--large { width: min(720px, 100%); }
+.modal--xlarge { width: min(980px, 100%); }
 .modal__header { padding: 18px 18px 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
 .modal__header h2 { margin: 0; color: var(--petrol-950); font-size: 1.15rem; }
 .modal__body { padding: 18px; overflow-y: auto; }
@@ -320,6 +321,133 @@ h1, h2, h3, p { margin-top: 0; }
 .donation-card__details p { width: 100%; }
 .donation-card__actions { margin: 10px 0 0 50px; display: flex; gap: 6px; }
 
+.donation-type-selector, .operation-type-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.donation-type-selector button, .operation-type-selector button {
+  min-height: 76px;
+  padding: 13px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-align: left;
+  color: #415358;
+  background: #f6f8f6;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+}
+.donation-type-selector button > svg, .operation-type-selector button > svg { flex: none; color: var(--muted); }
+.donation-type-selector button span, .operation-type-selector button span { display: flex; flex-direction: column; gap: 3px; }
+.donation-type-selector button strong, .operation-type-selector button strong { color: var(--petrol-950); font-size: .88rem; }
+.donation-type-selector button small, .operation-type-selector button small { color: var(--muted); font-size: .7rem; }
+.donation-type-selector button.is-active, .operation-type-selector button.is-active { border-color: var(--green-700); background: var(--green-100); box-shadow: 0 0 0 2px rgba(21,115,94,.08); }
+.donation-type-selector button.is-active > svg, .operation-type-selector button.is-active > svg { color: var(--green-700); }
+.operation-type-selector button.is-expense { border-color: var(--red-700); background: var(--red-100); box-shadow: 0 0 0 2px rgba(164,60,66,.07); }
+.operation-type-selector button.is-expense > svg { color: var(--red-700); }
+.donation-card--tangible { border-color: #d7c8e2; background: #fdfaff; }
+.donation-card--tangible .donation-icon { color: #765294; background: #eee5f5; }
+.tangible-badge { width: fit-content; padding: 6px 9px; color: #694783; background: #eee5f5; border-radius: 99px; font-size: .68rem; font-weight: 800; }
+.donation-card__tangible-detail { margin: 12px 0 0 50px !important; padding: 11px 13px; color: #3f3150 !important; background: #f1eaf6; border-left: 3px solid #8b65a8; border-radius: 0 10px 10px 0; font-size: .84rem !important; line-height: 1.5; }
+
+.income-form { display: flex; flex-direction: column; gap: 18px; }
+.income-general-fields { padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.concept-picker { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.concept-picker summary { min-height: 64px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; list-style: none; cursor: pointer; background: #f4f7f5; }
+.concept-picker summary::-webkit-details-marker { display: none; }
+.concept-picker summary > span:first-child { display: flex; flex: 1; flex-direction: column; gap: 2px; }
+.concept-picker summary strong { color: var(--petrol-950); font-size: .9rem; }
+.concept-picker summary small { color: var(--muted); font-size: .72rem; }
+.concept-picker summary > svg { color: var(--muted); transition: transform .15s ease; }
+.concept-picker[open] summary > svg { transform: rotate(180deg); }
+.concept-picker__count { padding: 5px 8px; color: var(--petrol-800); background: var(--petrol-100); border-radius: 99px; font-size: .68rem; font-weight: 700; }
+.concept-grid { padding: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; border-top: 1px solid var(--line); }
+.concept-option { min-height: 58px; padding: 10px; display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 8px; color: #415156; border: 1px solid #e0e5e2; border-radius: 11px; cursor: pointer; font-size: .76rem; font-weight: 700; }
+.concept-option:hover { border-color: #b9cbc6; background: #fbfcfb; }
+.concept-option.is-selected { color: var(--petrol-950); border-color: var(--petrol-800); background: #eaf2f0; box-shadow: inset 3px 0 var(--gold-500); }
+.concept-option input { width: 17px; height: 17px; accent-color: var(--petrol-800); }
+.concept-option__code { color: var(--gold-600); font-variant-numeric: tabular-nums; }
+.income-lines { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.income-lines__heading { padding: 11px 13px; display: flex; align-items: center; justify-content: space-between; background: var(--petrol-950); color: white; }
+.income-lines__heading span { opacity: .78; font-size: .7rem; }
+.income-line { padding: 12px; display: grid; grid-template-columns: minmax(180px, 1.3fr) minmax(120px, .8fr) minmax(90px, .45fr) minmax(120px, .7fr); align-items: end; gap: 10px; border-bottom: 1px solid var(--line); }
+.income-line__concept { min-width: 0; display: flex; flex-direction: column; gap: 3px; align-self: center; }
+.income-line__concept span { color: var(--gold-600); font-size: .68rem; font-weight: 800; }
+.income-line__concept strong { color: var(--petrol-950); font-size: .82rem; }
+.income-line .field input { min-height: 42px; }
+.income-line__subtotal { min-height: 42px; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; }
+.income-line__subtotal span { color: var(--muted); font-size: .66rem; }
+.income-line__subtotal strong { color: var(--green-700); font-size: 1rem; }
+.income-grand-total { padding: 15px; display: flex; align-items: center; justify-content: flex-end; gap: 18px; color: var(--petrol-950); background: var(--gold-100); }
+.income-grand-total span { font-size: .77rem; font-weight: 800; text-transform: uppercase; }
+.income-grand-total strong { font-size: 1.35rem; }
+
+.financial-summary { margin-bottom: 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 9px; }
+.financial-summary__card { min-height: 112px; padding: 14px; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; color: var(--petrol-800); background: #f5f7f5; border: 1px solid var(--line); border-radius: 13px; }
+.financial-summary__card span { margin-top: auto; color: var(--muted); font-size: .68rem; }
+.financial-summary__card strong { max-width: 100%; color: var(--petrol-950); font-size: 1.08rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.financial-summary__card--income { color: var(--green-700); background: #f0f8f5; }
+.financial-summary__card--expense { color: var(--red-700); background: #fff5f4; }
+.financial-summary__card--balance { color: var(--gold-600); background: #fffaf0; }
+.concept-totals { margin-bottom: 16px; padding: 14px; background: #f6f8f6; border-radius: 13px; }
+.concept-totals__heading { margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.concept-totals__heading h3 { margin: 0; color: var(--petrol-950); font-size: .92rem; }
+.concept-totals__heading > span { color: var(--muted); font-size: .7rem; }
+.concept-totals__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+.concept-totals article { min-width: 0; padding: 9px 10px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px; background: white; border: 1px solid var(--line); border-radius: 10px; }
+.concept-totals article div { min-width: 0; display: flex; flex-direction: column; }
+.concept-totals article small { color: var(--gold-600); font-size: .62rem; font-weight: 800; }
+.concept-totals article strong { overflow: hidden; color: #33464a; font-size: .74rem; text-overflow: ellipsis; white-space: nowrap; }
+.concept-totals article b { color: var(--petrol-950); font-size: .79rem; white-space: nowrap; }
+.movement-badge { width: fit-content; padding: 4px 6px; border-radius: 99px; font-size: .58rem; font-weight: 800; text-transform: uppercase; }
+.movement-badge--ingreso { color: var(--green-700); background: var(--green-100); }
+.movement-badge--egreso { color: var(--red-700); background: var(--red-100); }
+.income-table-wrap { width: 100%; overflow-x: auto; border: 1px solid var(--line); border-radius: 13px; }
+.income-table { width: 100%; min-width: 1180px; border-collapse: collapse; font-size: .74rem; }
+.income-table th { padding: 10px; text-align: left; color: white; background: var(--petrol-900); font-size: .67rem; white-space: nowrap; }
+.income-table td { padding: 10px; vertical-align: top; color: #405156; border-bottom: 1px solid var(--line); }
+.income-table tbody tr:last-child td { border-bottom: 0; }
+.income-table tbody tr:hover { background: #fafbf9; }
+.income-table td:first-child { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.income-table td:nth-child(2), .income-table td:nth-child(6), .income-table td:nth-child(7), .income-table td:nth-child(8) { white-space: nowrap; }
+.income-table td:nth-child(4) { min-width: 190px; }
+.income-table td:nth-child(4) > strong, .income-table td:nth-child(4) > small { display: block; }
+.income-table td:nth-child(4) > small { margin-top: 3px; color: var(--muted); line-height: 1.4; }
+.income-table .amount-income { color: var(--green-700); font-weight: 800; }
+.income-table .amount-expense { color: var(--red-700); font-weight: 800; }
+.income-table__actions { display: flex; align-items: center; justify-content: flex-end; gap: 5px; }
+.income-table__actions .icon-button { width: 36px; height: 36px; }
+
+.receipt-modal-content { display: flex; flex-direction: column; gap: 14px; }
+.receipt-print-area { width: 100%; color: #1f2d3d; background: white; border: 1px solid #b9c0c6; }
+.receipt-header { min-height: 92px; padding: 13px 22px; display: flex; align-items: center; justify-content: center; gap: 15px; color: white; background: #245781; text-align: center; }
+.receipt-header img { width: 66px; height: 66px; object-fit: contain; border-radius: 50%; background: white; }
+.receipt-header div { display: flex; flex-direction: column; gap: 4px; }
+.receipt-header strong { font-size: 1rem; letter-spacing: .025em; }
+.receipt-header span { color: #e5f0f7; font-size: .8rem; font-weight: 700; }
+.receipt-title { margin: 0; padding: 17px; color: #245781; background: #d8e8f4; text-align: center; font-size: 1rem; letter-spacing: .04em; }
+.receipt-reference-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.receipt-reference-grid > div { min-height: 68px; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 12px; border-right: 1px solid #b9c0c6; border-bottom: 1px solid #b9c0c6; }
+.receipt-reference-grid > div:last-child { border-right: 0; }
+.receipt-reference-grid span { font-size: .72rem; font-weight: 800; }
+.receipt-reference-grid strong { padding: 8px; color: #245781; background: #fff2c7; text-align: center; font-size: .88rem; }
+.receipt-details { margin: 0; }
+.receipt-details > div { min-height: 46px; display: grid; grid-template-columns: minmax(145px, .7fr) 1.6fr; border-bottom: 1px solid #b9c0c6; }
+.receipt-details dt, .receipt-details dd { margin: 0; padding: 11px 14px; }
+.receipt-details dt { display: flex; align-items: center; background: #f1f2f2; font-size: .76rem; font-weight: 800; }
+.receipt-details dd { display: flex; flex-direction: column; justify-content: center; color: #22354a; font-size: .84rem; font-weight: 700; }
+.receipt-details dd small { margin-top: 6px; color: #5d6b77; font-size: .72rem; font-weight: 500; white-space: pre-wrap; }
+.receipt-details__large { min-height: 96px !important; }
+.receipt-total { min-height: 98px; display: grid; grid-template-columns: minmax(145px, .7fr) 1.6fr; }
+.receipt-total span, .receipt-total strong { padding: 18px 14px; display: flex; align-items: center; }
+.receipt-total span { justify-content: center; color: white; background: #245781; font-size: .9rem; font-weight: 800; }
+.receipt-total strong { color: #245781; background: #fff2c7; font-size: 1.45rem; }
+.receipt-signatures { padding: 72px 28px 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 70px; }
+.receipt-signatures label { min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.receipt-signature__line { width: 100%; border-top: 1px solid #3f4951; }
+.receipt-signatures input { width: 100%; margin-top: 5px; padding: 4px; color: #1f2d3d; background: transparent; border: 0; border-radius: 5px; outline: none; text-align: center; font-weight: 700; }
+.receipt-signatures input:focus { background: #fff8df; box-shadow: 0 0 0 2px var(--gold-100); }
+.receipt-signatures small { color: var(--muted); font-size: .68rem; font-style: italic; }
+.receipt-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.receipt-copy-status { margin: -4px 0 0; color: var(--muted); font-size: .76rem; }
+
 .status { width: fit-content; padding: 5px 9px; border-radius: 99px; font-size: .68rem; font-weight: 800; text-transform: uppercase; }
 .status--paid { color: var(--green-700); background: var(--green-100); }
 .status--pending { color: var(--red-700); background: var(--red-100); }
@@ -359,6 +487,8 @@ h1, h2, h3, p { margin-top: 0; }
   .stats-grid { grid-template-columns: repeat(3, 1fr); }
   .member-grid { grid-template-columns: 1fr; }
   .bank-details { grid-template-columns: repeat(2, 1fr); }
+  .financial-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .concept-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 720px) {
@@ -391,6 +521,8 @@ h1, h2, h3, p { margin-top: 0; }
   .history-row { grid-template-columns: 1fr auto; }
   .history-row > .status { justify-self: end; }
   .history-row__actions { grid-column: 1 / -1; justify-content: flex-start; padding-top: 6px; border-top: 1px solid var(--line); }
+  .income-line { grid-template-columns: 1fr 1fr; }
+  .income-line__concept { grid-column: 1 / -1; }
 }
 
 @media (max-width: 520px) {
@@ -435,6 +567,25 @@ h1, h2, h3, p { margin-top: 0; }
   .donation-card__main { align-items: flex-start; flex-wrap: wrap; }
   .donation-card__main > strong { width: 100%; margin-left: 50px; }
   .donation-card__details, .donation-card__actions { margin-left: 0; }
+  .donation-card__tangible-detail { margin-left: 0 !important; }
+  .donation-type-selector, .operation-type-selector { grid-template-columns: 1fr; }
+  .concept-grid, .concept-totals__grid, .financial-summary { grid-template-columns: 1fr; }
+  .concept-picker summary { align-items: flex-start; flex-wrap: wrap; }
+  .concept-picker summary > svg { margin-left: auto; }
+  .income-line { grid-template-columns: 1fr; }
+  .income-line__concept { grid-column: auto; }
+  .income-line__subtotal { align-items: flex-start; }
+  .income-grand-total { align-items: flex-end; flex-direction: column; gap: 4px; }
+  .receipt-header { padding-inline: 12px; }
+  .receipt-header img { width: 54px; height: 54px; }
+  .receipt-header strong { font-size: .8rem; }
+  .receipt-header span { font-size: .66rem; }
+  .receipt-reference-grid { grid-template-columns: 1fr; }
+  .receipt-reference-grid > div { border-right: 0; }
+  .receipt-details > div, .receipt-total { grid-template-columns: 112px 1fr; }
+  .receipt-details dt, .receipt-details dd { padding-inline: 9px; }
+  .receipt-signatures { padding-inline: 12px; gap: 24px; }
+  .receipt-actions .button { width: 100%; }
   .profile-header-card { padding: 16px; flex-wrap: wrap; }
   .profile-header-card > .button { width: 100%; }
   .profile-avatar { width: 52px; height: 52px; }
@@ -457,4 +608,22 @@ h1, h2, h3, p { margin-top: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+@media print {
+  @page { margin: 12mm; }
+  html, body { background: white !important; }
+  body * { visibility: hidden !important; }
+  .receipt-print-area, .receipt-print-area * { visibility: visible !important; }
+  .receipt-print-area {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    border: 1px solid #7b858d;
+    box-shadow: none;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .receipt-signatures input { background: transparent !important; box-shadow: none !important; }
 }

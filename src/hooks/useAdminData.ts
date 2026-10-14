@@ -1,14 +1,16 @@
 import { useCallback, useEffect, useState } from 'react'
 import { listDonaciones } from '../services/donaciones'
+import { isMissingIngresosTableError, listIngresos } from '../services/ingresos'
 import { listIntegrantes } from '../services/integrantes'
 import { listPagos } from '../services/pagos'
-import type { Donacion, Integrante, Pago } from '../types'
+import type { Donacion, Ingreso, Integrante, Pago } from '../types'
 import { friendlyError } from '../utils/errors'
 
 export const useAdminData = (year: number) => {
   const [members, setMembers] = useState<Integrante[]>([])
   const [payments, setPayments] = useState<Pago[]>([])
   const [donations, setDonations] = useState<Donacion[]>([])
+  const [incomes, setIncomes] = useState<Ingreso[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -16,14 +18,19 @@ export const useAdminData = (year: number) => {
     setLoading(true)
     setError('')
     try {
-      const [nextMembers, nextPayments, nextDonations] = await Promise.all([
+      const [nextMembers, nextPayments, nextDonations, nextIncomes] = await Promise.all([
         listIntegrantes(),
         listPagos(year),
         listDonaciones(),
+        listIngresos().catch((caught: unknown) => {
+          if (isMissingIngresosTableError(caught)) return []
+          throw caught
+        }),
       ])
       setMembers(nextMembers)
       setPayments(nextPayments)
       setDonations(nextDonations)
+      setIncomes(nextIncomes)
     } catch (caught) {
       setError(friendlyError(caught))
     } finally {
@@ -45,5 +52,5 @@ export const useAdminData = (year: number) => {
     }
   }, [refresh])
 
-  return { members, payments, donations, loading, error, refresh }
+  return { members, payments, donations, incomes, loading, error, refresh }
 }

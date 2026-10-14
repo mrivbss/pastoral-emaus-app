@@ -6,7 +6,7 @@ interface ModalProps extends PropsWithChildren {
   title: string
   onClose: () => void
   footer?: ReactNode
-  size?: 'small' | 'medium' | 'large'
+  size?: 'small' | 'medium' | 'large' | 'xlarge'
 }
 
 export function Modal({ open, title, onClose, children, footer, size = 'medium' }: ModalProps) {
