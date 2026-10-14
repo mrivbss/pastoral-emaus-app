@@ -286,8 +286,10 @@ h1, h2, h3, p { margin-top: 0; }
 .member-card__top { display: flex; align-items: center; gap: 10px; }
 .avatar { width: 41px; height: 41px; display: grid; place-items: center; flex: none; color: var(--petrol-800); background: var(--petrol-100); border-radius: 50%; }
 .member-card__identity { min-width: 0; flex: 1; }
+.member-card__name-line { display: flex; align-items: center; gap: 7px; min-width: 0; }
 .member-card__identity h3 { margin: 0; color: var(--petrol-950); font-size: .98rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .member-card__identity p { margin: 2px 0 0; color: var(--muted); font-size: .7rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.member-type-badge { flex: none; padding: 3px 7px; border-radius: 99px; color: #86500a; background: var(--gold-100); font-size: .58rem; font-weight: 800; text-transform: uppercase; }
 .member-status { width: fit-content; padding: 5px 8px; border-radius: 99px; font-size: .66rem; font-weight: 700; }
 .member-status--activo { color: var(--green-700); background: var(--green-100); }
 .member-status--inactivo { color: #5f686b; background: #e8ebea; }

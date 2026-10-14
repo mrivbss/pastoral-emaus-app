@@ -49,6 +49,8 @@ function renderPage(url, width, height, virtualTimeBudget = 3000) {
       '--headless=new',
       '--disable-gpu',
       '--no-sandbox',
+      '--no-first-run',
+      '--disable-background-mode',
       `--window-size=${width},${height}`,
       `--virtual-time-budget=${virtualTimeBudget}`,
       '--dump-dom',
@@ -123,11 +125,15 @@ test('public header only exposes the administration access', { skip: !browser },
 test('public pages use server terminology', { skip: !browser }, async () => {
   const homeHtml = await renderPage(`${appUrl}/`, 1280, 900)
   const registrationHtml = await renderPage(`${appUrl}/registro`, 1280, 900)
+  const walkerRegistrationHtml = await renderPage(`${appUrl}/registro-caminante`, 1280, 900)
 
   assert.match(homeHtml, /INSCRIPCIÓN SERVIDOR/)
+  assert.match(homeHtml, /INSCRIPCIÓN CAMINANTE/)
   assert.doesNotMatch(homeHtml, /integrantes?/i)
   assert.match(registrationHtml, /Inscripción de servidor/)
   assert.doesNotMatch(registrationHtml, /integrantes?/i)
+  assert.match(walkerRegistrationHtml, /Inscripción de caminante/)
+  assert.match(walkerRegistrationHtml, /participar como caminante/)
 })
 
 test('transfer details toggle open and closed on the public home', { skip: !browser }, async () => {

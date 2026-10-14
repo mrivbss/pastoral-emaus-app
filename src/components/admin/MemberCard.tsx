@@ -17,13 +17,17 @@ interface MemberCardProps {
 
 export function MemberCard({ member, payments, month, year, onPay, onWhatsApp, onEdit, onDelete }: MemberCardProps) {
   const selectedPayment = payments.find((payment) => payment.mes === month) || null
+  const isWalker = member.observaciones?.trim().toUpperCase().startsWith('[CAMINANTE]') ?? false
 
   return (
     <article className="member-card">
       <div className="member-card__top">
         <span className="avatar"><UserRound size={23} /></span>
         <div className="member-card__identity">
-          <h3>{member.nombre}</h3>
+          <div className="member-card__name-line">
+            <h3>{member.nombre}</h3>
+            {isWalker && <span className="member-type-badge">Caminante</span>}
+          </div>
           <p>{member.rut} · {member.telefono || 'Sin teléfono'}</p>
         </div>
         <span className={`member-status member-status--${member.estado.toLowerCase()}`}>{member.estado}</span>

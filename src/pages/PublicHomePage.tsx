@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronUp, ClipboardPenLine, LockKeyhole, MessageCircle } from 'lucide-react'
+import { ChevronDown, ChevronUp, ClipboardPenLine, Footprints, LockKeyhole, MessageCircle } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { TransferCard } from '../components/TransferCard'
@@ -32,6 +32,9 @@ export function PublicHomePage() {
             <div className="hero__actions">
               <Link className="button button--gold button--large" to="/registro">
                 <ClipboardPenLine size={20} /> INSCRIPCIÓN SERVIDOR
+              </Link>
+              <Link className="button button--gold button--large" to="/registro-caminante">
+                <Footprints size={20} /> INSCRIPCIÓN CAMINANTE
               </Link>
               <button
                 type="button"

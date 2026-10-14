@@ -23,6 +23,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<PublicHomePage />} />
               <Route path="/registro" element={<RegistrationPage />} />
+              <Route path="/registro-caminante" element={<RegistrationPage registrationType="caminante" />} />
               <Route path="/admin/login" element={<LoginPage />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/admin" element={<AdminDashboardPage />} />

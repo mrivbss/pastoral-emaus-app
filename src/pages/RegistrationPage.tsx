@@ -10,7 +10,12 @@ const initialForm = {
   nombre: '', rut: '', telefono: '', email: '', fechaIngreso: '', direccion: '', observaciones: '',
 }
 
-export function RegistrationPage() {
+interface RegistrationPageProps {
+  registrationType?: 'servidor' | 'caminante'
+}
+
+export function RegistrationPage({ registrationType = 'servidor' }: RegistrationPageProps) {
+  const isWalker = registrationType === 'caminante'
   const [form, setForm] = useState(initialForm)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
@@ -34,6 +39,9 @@ export function RegistrationPage() {
         rut: formatRut(form.rut),
         email: form.email.trim().toLowerCase(),
         fechaIngreso: form.fechaIngreso || null,
+        observaciones: isWalker
+          ? `[CAMINANTE]${form.observaciones.trim() ? ` ${form.observaciones.trim()}` : ''}`
+          : form.observaciones.trim(),
       })
       setSuccess(true)
       setForm(initialForm)
@@ -62,9 +70,13 @@ export function RegistrationPage() {
           <section className="form-card">
             <div className="form-card__heading">
               <span><UserPlus size={24} /></span>
-              <div><p>Registro público</p><h1>Inscripción de servidor</h1></div>
+              <div><p>Registro público</p><h1>Inscripción de {isWalker ? 'caminante' : 'servidor'}</h1></div>
             </div>
-            <p className="form-intro">Completa tus datos para incorporarte al registro de la Pastoral Emaús Varones PSAH. Los campos con * son obligatorios.</p>
+            <p className="form-intro">
+              {isWalker
+                ? 'Completa tus datos para participar como caminante en la Pastoral Emaús Varones PSAH. Los campos con * son obligatorios.'
+                : 'Completa tus datos para incorporarte al registro de la Pastoral Emaús Varones PSAH. Los campos con * son obligatorios.'}
+            </p>
             <form className="form-grid" onSubmit={submit}>
               <label className="field field--wide"><span>Nombre completo *</span><input required minLength={3} autoComplete="name" value={form.nombre} onChange={(e) => update('nombre', e.target.value)} /></label>
               <label className="field"><span>RUT *</span><input required value={form.rut} onChange={(e) => update('rut', e.target.value)} onBlur={() => form.rut && update('rut', formatRut(form.rut))} placeholder="12.345.678-9" /></label>
